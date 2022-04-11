@@ -314,11 +314,6 @@ public class SendMessageProcessor extends AbstractSendMessageProcessor implement
         if (this.brokerController.getMessageStore().isDelayDeliveryTimeMsg(msgInner)) {
             SendMessageResponseHeader sendMessageResponseHeader = new SendMessageResponseHeader();
             sendMessageResponseHeader.setQueueId(queueIdInt);
-            if(StringUtils.isEmpty(msgInner.getMsgId())){
-                ByteBuffer buffer = ByteBuffer.allocate(MessageDecoder.MSG_ID_LENGTH);
-                String msgId = MessageDecoder.createMessageId(buffer, msgInner.getStoreHostBytes(), 0);
-                msgInner.setMsgId(msgId);
-            }
             sendMessageResponseHeader.setMsgId(msgInner.getMsgId());
             sendMessageResponseHeader.setQueueOffset(msgInner.getQueueOffset());
             sendMessageResponseHeader.setTransactionId(msgInner.getTransactionId());
